@@ -1,0 +1,10 @@
+.claude/
+.DS_Store
+node_modules/
+*.bak
+*.log
+.env
+.env.*
+dist/
+build/
+.security-reports/
