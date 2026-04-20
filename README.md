@@ -18,29 +18,25 @@ This copies `security-scan.md` into `~/.claude/commands/`. No npm publish, no re
 
 ## Usage
 
-`cd` into the repo you want to audit, open Claude Code, and run:
+**claude-sentinel runs from *outside* the repo it is auditing.** Create a project folder, clone the target repo inside it, then open Claude from the project folder — not from inside the clone:
+
+```bash
+mkdir ~/audits/acme-audit && cd ~/audits/acme-audit
+git clone https://github.com/acme/api-server.git
+claude
+```
+
+Then in Claude:
 
 ```
 /security-scan
 ```
 
-For clarity, **tell Claude which repo to scan**. This avoids any ambiguity about which directory is the target:
+The command auto-detects the single `.git` subdirectory (`api-server/` here) as the scan target. It refuses to run if your current directory is itself a git repo — that would put Claude's shell *inside* the code being audited, which is exactly what the isolation model prevents.
 
-```
-Run /security-scan on ~/code/my-project
-```
+**Why outside the clone?** Scanner tools treat the target as data. If Claude's shell lives inside the target, any compromised file (hook, pre-commit, dotfile, script buried in a README) is one stray command away from executing. Keeping the shell in a clean outer folder means the target repo is never Claude's CWD — it's only ever a path argument passed to trusted scanner binaries.
 
-```
-/security-scan — scan the repo at /Users/me/work/api-server
-```
-
-The scan writes a Markdown report to:
-
-```
-<repo>/.security-reports/security-report-<repo>-<date>.md
-```
-
-Add `.security-reports/` to the repo's `.gitignore` to keep reports local.
+**Scanning multiple repos:** use a fresh project folder per scan, each containing exactly one clone. The auto-detector errors if it finds zero or multiple `.git` subdirectories.
 
 ## Required binaries
 
@@ -79,18 +75,21 @@ pip install pip-audit        # or: pipx install pip-audit
 
 ## Safety model
 
-The scanner runs in a strict two-layer isolation architecture:
+claude-sentinel enforces three isolation boundaries:
 
-- **Execution layer:** trusted scanner binaries (resolved to absolute paths at startup) receive repo files as data input and write JSON to a temp directory (`/tmp/security-scan-<ts>/`).
-- **Interpretation layer:** Claude reads only the temp directory outputs — never any path inside the scanned repo.
-
-Bash blocks in the command will never run `npm install`, execute scripts from the repo, or follow instructions found inside repo files. Repository content is treated as untrusted data throughout.
+1. **Shell boundary** — Claude's working directory stays in the outer project folder. The scanner never `cd`s into the cloned repo. Tools that accept a path flag get `$SCAN_TARGET` as an explicit argument; tools without one (npm audit, pip-audit, snyk-agent-scan) run inside scoped `bash -c "cd <target> && tool"` subshells so only that subprocess ever touches the repo.
+2. **Execution boundary** — Trusted scanner binaries are resolved to absolute paths via `command -v` at startup. Scanners read repo files as data and write JSON output to a fresh temp directory (`/tmp/security-scan-<ts>/`). Bash blocks never run `npm install`, execute scripts from the repo, or follow instructions found inside repo files.
+3. **Interpretation boundary** — Claude reads only the scanner JSON outputs from the temp directory. Repo file contents are never sourced into the conversation, so nothing inside the audited code can steer Claude's behavior via prompt injection.
 
 ## Report output
 
-- Written to `<scanned-repo>/.security-reports/security-report-<repo>-<date>.md`
-- Add `.security-reports/` to your `.gitignore`
-- Summary table printed to Claude's response immediately after the scan
+The scan writes a single Markdown report to the **project folder** (one level above the clone):
+
+```
+<project-folder>/security-report-<repo>-<YYYY-MM-DD>.md
+```
+
+Reports live outside the cloned repo by design — no `.gitignore` edits needed, and re-cloning the target never overwrites or leaks audit history. A summary table is also printed to Claude's response immediately after the scan completes.
 
 ## Uninstall
 
