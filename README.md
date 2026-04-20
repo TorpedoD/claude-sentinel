@@ -64,18 +64,18 @@ pip install pip-audit        # or: pipx install pip-audit
 
 | # | Tool | Category |
 |---|------|----------|
-| 1 | trivy fs | CVE vulnerabilities (HIGH/CRITICAL) |
-| 2 | gitleaks | Secrets & credentials in files + git history |
-| 3 | semgrep | SAST — code-level security issues |
-| 4 | osv-scanner | Open source dependency vulnerabilities (OSV DB) |
-| 5 | npm audit | Node.js dependency vulnerabilities |
-| 6 | pip-audit | Python dependency vulnerabilities |
-| 7 | syft | SBOM generation |
-| 8 | grype | SBOM vulnerability scan (wave 2, runs after syft) |
-| 9 | trivy config | IaC / infrastructure config misconfigurations |
-| 10 | snyk-agent-scan | AI agent / MCP server security |
-| 11 | skill-scanner | Claude Code skill package safety (Cisco AI Defense) |
-| 12 | tirith | Hidden content, bidi overrides, config poisoning |
+| 1 | [trivy fs](https://github.com/aquasecurity/trivy) | CVE vulnerabilities (HIGH/CRITICAL) |
+| 2 | [gitleaks](https://github.com/gitleaks/gitleaks) | Secrets & credentials in files + git history |
+| 3 | [semgrep](https://github.com/semgrep/semgrep) | SAST — code-level security issues |
+| 4 | [osv-scanner](https://github.com/google/osv-scanner) | Open source dependency vulnerabilities (OSV DB) |
+| 5 | [npm audit](https://docs.npmjs.com/cli/v10/commands/npm-audit) | Node.js dependency vulnerabilities |
+| 6 | [pip-audit](https://github.com/pypa/pip-audit) | Python dependency vulnerabilities |
+| 7 | [syft](https://github.com/anchore/syft) | SBOM generation |
+| 8 | [grype](https://github.com/anchore/grype) | SBOM vulnerability scan (wave 2, runs after syft) |
+| 9 | [trivy config](https://github.com/aquasecurity/trivy) | IaC / infrastructure config misconfigurations |
+| 10 | [snyk-agent-scan](https://github.com/snyk/agent-scan) | AI agent / MCP server security |
+| 11 | [skill-scanner](https://github.com/cisco-ai-defense/skill-scanner) | Claude Code skill package safety (Cisco AI Defense) |
+| 12 | [tirith](https://github.com/sheeki03/tirith) | Hidden content, bidi overrides, config poisoning |
 
 ## Safety model
 
