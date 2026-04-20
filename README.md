@@ -1,5 +1,11 @@
 # claude-sentinel
 
+> Security audit slash command for Claude Code — 12 scanners, one command.
+
+![License](https://img.shields.io/github/license/TorpedoD/claude-sentinel)
+![Last Commit](https://img.shields.io/github/last-commit/TorpedoD/claude-sentinel)
+![Release](https://img.shields.io/github/v/release/TorpedoD/claude-sentinel)
+
 12-tool security audit for Claude Code. One slash command runs trivy, gitleaks, semgrep, osv-scanner, npm audit, pip-audit, syft, grype, snyk-agent-scan, skill-scanner, and tirith in parallel — with strict read-only sandboxing and anti-prompt-injection guards baked in.
 
 ## Install
