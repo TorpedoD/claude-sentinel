@@ -1,28 +1,7 @@
 {
   "name": "claude-sentinel",
-  "version": "0.1.0",
-  "description": "12-tool security audit command for Claude Code — SAST, secrets, SBOM, SCA, AI-skill safety, and hidden-instruction detection via a single slash command. Installer runs via npx, no publish required.",
-  "type": "module",
-  "bin": {
-    "claude-sentinel": "./bin/cli.mjs"
-  },
-  "files": [
-    "bin",
-    "commands",
-    "README.md",
-    "LICENSE"
-  ],
-  "engines": {
-    "node": ">=16.7.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TorpedoD/claude-sentinel.git"
-  },
-  "homepage": "https://github.com/TorpedoD/claude-sentinel",
-  "bugs": {
-    "url": "https://github.com/TorpedoD/claude-sentinel/issues"
-  },
+  "version": "0.2.0",
+  "description": "12-tool security audit skill for Claude Code — SAST, secrets, SBOM, SCA, AI-skill safety, and hidden-instruction detection via a single slash command.",
   "keywords": [
     "claude-code",
     "claude",
@@ -43,7 +22,16 @@
     "llm",
     "ai-security",
     "prompt-injection",
-    "slash-command"
+    "claude-skill",
+    "skill"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TorpedoD/claude-sentinel.git"
+  },
+  "homepage": "https://github.com/TorpedoD/claude-sentinel",
+  "bugs": {
+    "url": "https://github.com/TorpedoD/claude-sentinel/issues"
+  },
   "license": "MIT"
 }

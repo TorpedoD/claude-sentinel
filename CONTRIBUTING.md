@@ -12,8 +12,8 @@ Open a GitHub issue with:
 ## Local development
 
 1. Clone the repo
-2. Run `node bin/cli.mjs add` to install the command into `~/.claude/commands/`
-3. Edit `commands/security-scan.md` and re-run the installer to test
+2. Copy the skill into place: `cp -r skills/security-scan ~/.claude/skills/security-scan`
+3. Edit `~/.claude/skills/security-scan/SKILL.md` to test, then copy back when done
 
 ## Pull requests
 

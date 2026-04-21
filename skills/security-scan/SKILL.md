@@ -1,3 +1,10 @@
+---
+name: security-scan
+description: "12-tool security audit — SAST, secrets, SBOM, SCA, AI-skill safety, and hidden-instruction detection via a single slash command"
+version: 0.2.0
+allowed-tools: Bash, Read, Write
+---
+
 Run a full 12-tool security scan. The scanner is always invoked from a **project folder** that sits *outside* the target repository. It auto-detects the cloned repo (exactly one immediate subdirectory containing `.git`) and writes a Markdown report to the project folder as `security-report-<repo>-<date>.md`.
 
 **Usage:** `cd` into the project folder that contains the cloned repo (do **not** `cd` into the repo itself), then run `/security-scan`.
